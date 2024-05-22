@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 	<head>
 		
-<title>iOS启动时间测试调研记录 - 万家灯火</title>
+<title>iOS xctest metrics测试指标 - 万家灯火</title>
 <meta charset="utf-8" />
 <meta name="keywords" content="" />
 <meta
@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1716351514312">
+<link rel="stylesheet" href="/css/style.css?v=1716351514311">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/styles/github.min.css">
 <script src="/styles/highlight.min.js"></script>
@@ -36,13 +36,13 @@
         <div class="content">
 	<div class="banner">
 		<div class="container">
-			<h1>iOS启动时间测试调研记录</h1>
-			<div class="info"><span class="date">2025年5月21日</span>•wan-dada 
+			<h1>iOS xctest metrics测试指标</h1>
+			<div class="info"><span class="date">2025年5月22日</span>•wan-dada 
 			
 					《<a class="nexmoefont icon-appstore-fill -link" href="/categories/iOS%E8%AE%B0%E5%BD%95/">iOS记录</a>》
 				
 				
-					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/ios-launch-time.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
+					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xctest-measurement-metrics.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
 				
 			</div>
 			
@@ -50,8 +50,44 @@
 	</div>
 	<div class="container">
 		<article class="post">
-			<h2 id="1-使用xctest-measure"><a href="#1-使用xctest-measure" class="headerlink" title="1. 使用xctest measure"></a>1. 使用xctest measure</h2><p>xctest 支持编写性能测试来收集一段代码执行所用的时间、执行期间所用的内存或所写的数据这些方面的信息。<br>XCTest 会多次运行你的代码来测量请求的指标。<br>你可以为指标设置一个基准预期，如果测得的值比基准值差太多，XCTest 会报告测试失败。</p>
-<p>具体代码:</p>
+			<h3 id="metrics测试指标"><a href="#metrics测试指标" class="headerlink" title="metrics测试指标"></a>metrics测试指标</h3><p>文档: <a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/xctest/xctmetric">https://developer.apple.com/documentation/xctest/xctmetric</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XCTCPUMetric</td>
+<td>记录性能测试期间 CPU 活动信息的指标</td>
+</tr>
+<tr>
+<td>XCTClockMetric</td>
+<td>记录性能测试期间所用时间的指标。</td>
+</tr>
+<tr>
+<td>XCTMemoryMetric</td>
+<td>记录性能测试使用的物理内存的指标。</td>
+</tr>
+<tr>
+<td>XCTOSSignpostMetric</td>
+<td>用于记录性能测试执行带路标的代码区域所花费的时间的指标。</td>
+</tr>
+<tr>
+<td>XCTStorageMetric</td>
+<td>记录性能测试逻辑写入存储的数据量的指标。</td>
+</tr>
+<tr>
+<td>XCTApplicationLaunchMetric</td>
+<td>记录性能测试的应用程序启动持续时间的指标</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>代码示例:</p>
 <pre><code class="lang-swift">import XCTest
 
 final class PerformanceTests: XCTestCase &#123;
@@ -74,29 +110,6 @@ final class PerformanceTests: XCTestCase &#123;
     &#125;
 &#125;
 </code></pre>
-<p>请注意：下图，标红部分，这里传入了bundleID，用于启动特定的应用。</p>
-<p><img src="/images/xcode-measure-code.jpg" alt=""></p>
-<p>测试结果：</p>
-<p><img src="/images/xcode-measure-result.jpg" alt=""></p>
-<h2 id="2-使用Xcode-Instruments工具"><a href="#2-使用Xcode-Instruments工具" class="headerlink" title="2. 使用Xcode Instruments工具"></a>2. 使用Xcode Instruments工具</h2><p>Instrument是 苹果官方IDE Xcode 自带的 调试工具。<br>访问入口:Xcode 顶部菜单 【Xcode】-&gt;【Open Developer tool】-&gt;【lnstruments】。</p>
-<p><img src="/images/xcode-menus-toos.jpg" alt=""></p>
-<p>如下图所示，我们研究启动时间，主要用到两个。</p>
-<ul>
-<li>App Launch：用于查看App的启动过程，从而可以针对性的对启动速度进行优化</li>
-<li>Time Profiler：时间分析器，对运行在系统cpu上的进程执行基于低开销时间的采样</li>
-</ul>
-<p><img src="/images/xcode-instruments.jpg" alt=""></p>
-<h2 id="3-Xcode-配置DYLD环境变量"><a href="#3-Xcode-配置DYLD环境变量" class="headerlink" title="3. Xcode 配置DYLD环境变量"></a>3. Xcode 配置DYLD环境变量</h2><blockquote>
-<p>注意：DYLD_PRINT_STATISTICS 仅适用于iOS 15以下。iOS以上不起作用。</p>
-</blockquote>
-<p>DYLD 是动态链接器，可在执行应用程序时加载和链接应用程序的共享库。</p>
-<ul>
-<li>DYLD_PRINT_STATISTICS：录有关应用程序启动过程的统计信息，例如，应用程序启动完成后加载了多少镜像</li>
-<li>DYLD_PRINT_STATISTICS_DETAILS：记录动态加载程序何时调用构造函数程序和析构函数</li>
-</ul>
-<p><img src="/images/xcode-edit-schema.jpg" alt=""></p>
-<p>实际效果:</p>
-<p><img src="/images/xcode-console-time.jpg" alt=""></p>
 
 			<br>
 			
@@ -115,23 +128,8 @@ final class PerformanceTests: XCTestCase &#123;
             
             
                  
-                
-            
-                 
                  <!-- 在找到当前文章所在的 index -->
                     
-                    
-                         
-
-                        
-
-                         <!-- 下一篇文章 --> 
-                            <div class="new">
-                                <span>下一章</span>
-                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xctest-measurement-metrics/"> iOS xctest metrics测试指标</a>
-                            </div>
-                        
-
                     
                          
 
@@ -145,7 +143,7 @@ final class PerformanceTests: XCTestCase &#123;
                           <!-- 上一篇文章 --> 
                             <div class="old">
                                 <span>上一章</span>
-                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcrun-command-line-tool/"> xcrun命令行工具</a>
+                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/ios-launch-time/"> iOS启动时间测试调研记录</a>
                             </div>
                         
 
@@ -159,6 +157,16 @@ final class PerformanceTests: XCTestCase &#123;
                         
 
                     
+                         
+
+                        
+
+                        
+
+                    
+                
+            
+                 
                 
             
                  

@@ -4,20 +4,48 @@ date: 2025-5-21
 categories: iOS记录
 ---
 
-## 1. Xcode 配置DYLD环境变量
+## 1. 使用xctest measure
 
->注意：DYLD_PRINT_STATISTICS 仅适用于iOS 15以下。iOS以上不起作用。
+xctest 支持编写性能测试来收集一段代码执行所用的时间、执行期间所用的内存或所写的数据这些方面的信息。
+XCTest 会多次运行你的代码来测量请求的指标。
+你可以为指标设置一个基准预期，如果测得的值比基准值差太多，XCTest 会报告测试失败。
 
-DYLD 是动态链接器，可在执行应用程序时加载和链接应用程序的共享库。
+具体代码:
 
-- DYLD_PRINT_STATISTICS：录有关应用程序启动过程的统计信息，例如，应用程序启动完成后加载了多少镜像
-- DYLD_PRINT_STATISTICS_DETAILS：记录动态加载程序何时调用构造函数程序和析构函数
+```swift
+import XCTest
 
-![](/images/xcode-edit-schema.jpg)
+final class PerformanceTests: XCTestCase {
 
-实际效果:
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+    }
 
-![](/images/xcode-console-time.jpg)
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testLaunchPerformance() throws {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+            // This measures how long it takes to launch your application.
+            measure(metrics: [XCTApplicationLaunchMetric()]) {
+                XCUIApplication(bundleIdentifier: "io.dcloud.uniappx").launch()
+            }
+        }
+    }
+}
+```
+
+
+请注意：下图，标红部分，这里传入了bundleID，用于启动特定的应用。
+
+
+![](/images/xcode-measure-code.jpg)
+
+测试结果：
+
+![](/images/xcode-measure-result.jpg)
+
 
 ## 2. 使用Xcode Instruments工具
 
@@ -32,3 +60,18 @@ Instrument是 苹果官方IDE Xcode 自带的 调试工具。
 - Time Profiler：时间分析器，对运行在系统cpu上的进程执行基于低开销时间的采样
 
 ![](/images/xcode-instruments.jpg)
+
+## 3. Xcode 配置DYLD环境变量
+
+>注意：DYLD_PRINT_STATISTICS 仅适用于iOS 15以下。iOS以上不起作用。
+
+DYLD 是动态链接器，可在执行应用程序时加载和链接应用程序的共享库。
+
+- DYLD_PRINT_STATISTICS：录有关应用程序启动过程的统计信息，例如，应用程序启动完成后加载了多少镜像
+- DYLD_PRINT_STATISTICS_DETAILS：记录动态加载程序何时调用构造函数程序和析构函数
+
+![](/images/xcode-edit-schema.jpg)
+
+实际效果:
+
+![](/images/xcode-console-time.jpg)
