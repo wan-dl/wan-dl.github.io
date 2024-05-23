@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 	<head>
 		
-<title>iOS xctest metrics测试指标 - 万家灯火</title>
+<title>xcodebuild命令行工具 - 万家灯火</title>
 <meta charset="utf-8" />
 <meta name="keywords" content="" />
 <meta
@@ -36,13 +36,13 @@
         <div class="content">
 	<div class="banner">
 		<div class="container">
-			<h1>iOS xctest metrics测试指标</h1>
+			<h1>xcodebuild命令行工具</h1>
 			<div class="info"><span class="date">2025年5月22日</span>•wan-dada 
 			
 					《<a class="nexmoefont icon-appstore-fill -link" href="/categories/iOS%E8%AE%B0%E5%BD%95/">iOS记录</a>》
 				
 				
-					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xctest-measurement-metrics.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
+					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xcodebuild.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
 				
 			</div>
 			
@@ -50,65 +50,61 @@
 	</div>
 	<div class="container">
 		<article class="post">
-			<h3 id="metrics测试指标"><a href="#metrics测试指标" class="headerlink" title="metrics测试指标"></a>metrics测试指标</h3><p>文档: <a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/xctest/xctmetric">https://developer.apple.com/documentation/xctest/xctmetric</a></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>class</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>XCTCPUMetric</td>
-<td>记录性能测试期间 CPU 活动信息的指标</td>
-</tr>
-<tr>
-<td>XCTClockMetric</td>
-<td>记录性能测试期间所用时间的指标。</td>
-</tr>
-<tr>
-<td>XCTMemoryMetric</td>
-<td>记录性能测试使用的物理内存的指标。</td>
-</tr>
-<tr>
-<td>XCTOSSignpostMetric</td>
-<td>用于记录性能测试执行带路标的代码区域所花费的时间的指标。</td>
-</tr>
-<tr>
-<td>XCTStorageMetric</td>
-<td>记录性能测试逻辑写入存储的数据量的指标。</td>
-</tr>
-<tr>
-<td>XCTApplicationLaunchMetric</td>
-<td>记录性能测试的应用程序启动持续时间的指标</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>代码示例:</p>
-<pre><code class="lang-swift">import XCTest
+			<p>通常，我们都是在Xcode界面中进行操作。如果我们想在命令行操作，这个时候就会用到xcodebuild.</p>
+<p>xcodebuild是由Xcode提供的一种命令行工具，它允许开发者在终端中执行Xcode的一些操作。比如：</p>
+<ul>
+<li>工程编译</li>
+<li>自动化测试</li>
+</ul>
+<h2 id="查看sdk版本"><a href="#查看sdk版本" class="headerlink" title="查看sdk版本"></a>查看sdk版本</h2><pre><code class="lang-bash">xcodebuild  -showsdks
+</code></pre>
+<h2 id="项目信息"><a href="#项目信息" class="headerlink" title="项目信息"></a>项目信息</h2><pre><code class="lang-bash">xcodebuild -list
+</code></pre>
+<p>命令行输出结果:</p>
+<pre><code class="lang-accesslog">Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -list
 
-final class PerformanceTests: XCTestCase &#123;
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
 
-    override func setUpWithError() throws &#123;
-        continueAfterFailure = false
-    &#125;
+Information about project &quot;test&quot;:
+    Targets:
+        test
+        testUITests
 
-    override func tearDownWithError() throws &#123;
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    &#125;
+    Build Configurations:
+        Debug
+        Release
 
-    func testLaunchPerformance() throws &#123;
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) &#123;
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) &#123;
-                XCUIApplication(bundleIdentifier: &quot;io.dcloud.uniappx&quot;).launch()
-            &#125;
-        &#125;
-    &#125;
-&#125;
+    If no build configuration is specified and -scheme is not passed then &quot;Release&quot; is used.
+
+    Schemes:
+        test
+</code></pre>
+<h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><pre><code class="lang-bash">xcodebuild -project ~/t-projects/test/test.xcodeproj -target test
+
+
+xcodebuild -project ~/t-projects/test/test.xcodeproj -alltargets -configuration Release -sdk iphonesimulator -arch x86_64
+xcodebuild -project ~/t-projects/test/test.xcodeproj -alltargets -configuration Release -sdk iphoneos -arch arm
+</code></pre>
+<p>注意事项：</p>
+<ol>
+<li>-arch: 指的是CPU架构。比如x86_64、arm</li>
+</ol>
+<h2 id="安装应用到iOS模拟器"><a href="#安装应用到iOS模拟器" class="headerlink" title="安装应用到iOS模拟器"></a>安装应用到iOS模拟器</h2><pre><code class="lang-bash">xcrun simctl install booted test.app
+xcrun simctl install booted testUITests-Runner.app
+</code></pre>
+<h2 id="安装应用到iPhone真机"><a href="#安装应用到iPhone真机" class="headerlink" title="安装应用到iPhone真机"></a>安装应用到iPhone真机</h2><pre><code class="lang-bash">ideviceinstaller -u 00008110-001C35240CF2801E -i test.app
+</code></pre>
+<h2 id="xctest"><a href="#xctest" class="headerlink" title="xctest"></a>xctest</h2><blockquote>
+<p>相关的文档: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/wang-wang-blog/p/17127781.html">https://www.cnblogs.com/wang-wang-blog/p/17127781.html</a></p>
+</blockquote>
+<p>运行测试到iOS模拟器</p>
+<pre><code class="lang-bash">xcodebuild test -scheme test -destination &#39;platform=iOS Simulator,id=692AFF1D-3B88-400D-A9AB-99E50FF61D50&#39;
+</code></pre>
+<p>运行测试到iOS真机</p>
+<pre><code class="lang-bash">xcodebuild test -scheme test -destination &#39;platform=iOS,name=wang&#39;
+xcodebuild test -scheme test -destination &#39;platform=iOS,id=00008110-001C35240CF2801E&#39;
 </code></pre>
 
 			<br>
@@ -131,8 +127,18 @@ final class PerformanceTests: XCTestCase &#123;
                 
             
                  
+                
+            
+                 
                  <!-- 在找到当前文章所在的 index -->
                     
+                    
+                         
+
+                        
+
+                        
+
                     
                          
 
@@ -141,7 +147,7 @@ final class PerformanceTests: XCTestCase &#123;
                          <!-- 下一篇文章 --> 
                             <div class="new">
                                 <span>下一章</span>
-                                <a href="/2025/05/23/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcrun-notarytool/"> xcrun notarytool 命令行工具 - 对文件进行公证审核</a>
+                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xctest-measurement-metrics/"> iOS xctest metrics测试指标</a>
                             </div>
                         
 
@@ -158,7 +164,7 @@ final class PerformanceTests: XCTestCase &#123;
                           <!-- 上一篇文章 --> 
                             <div class="old">
                                 <span>上一章</span>
-                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcodebuild/"> xcodebuild命令行工具</a>
+                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/ios-launch-time/"> iOS启动时间测试调研记录</a>
                             </div>
                         
 
@@ -179,16 +185,6 @@ final class PerformanceTests: XCTestCase &#123;
                         
 
                     
-                         
-
-                        
-
-                        
-
-                    
-                
-            
-                 
                 
             
                  

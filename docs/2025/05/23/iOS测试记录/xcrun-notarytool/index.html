@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 	<head>
 		
-<title>iOS xctest metrics测试指标 - 万家灯火</title>
+<title>xcrun notarytool 命令行工具 - 对文件进行公证审核 - 万家灯火</title>
 <meta charset="utf-8" />
 <meta name="keywords" content="" />
 <meta
@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1716437361353">
+<link rel="stylesheet" href="/css/style.css?v=1716437361352">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/styles/github.min.css">
 <script src="/styles/highlight.min.js"></script>
@@ -36,13 +36,13 @@
         <div class="content">
 	<div class="banner">
 		<div class="container">
-			<h1>iOS xctest metrics测试指标</h1>
-			<div class="info"><span class="date">2025年5月22日</span>•wan-dada 
+			<h1>xcrun notarytool 命令行工具 - 对文件进行公证审核</h1>
+			<div class="info"><span class="date">2025年5月23日</span>•wan-dada 
 			
 					《<a class="nexmoefont icon-appstore-fill -link" href="/categories/iOS%E8%AE%B0%E5%BD%95/">iOS记录</a>》
 				
 				
-					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xctest-measurement-metrics.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
+					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xcrun-notarytool.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
 				
 			</div>
 			
@@ -50,65 +50,21 @@
 	</div>
 	<div class="container">
 		<article class="post">
-			<h3 id="metrics测试指标"><a href="#metrics测试指标" class="headerlink" title="metrics测试指标"></a>metrics测试指标</h3><p>文档: <a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/xctest/xctmetric">https://developer.apple.com/documentation/xctest/xctmetric</a></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>class</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>XCTCPUMetric</td>
-<td>记录性能测试期间 CPU 活动信息的指标</td>
-</tr>
-<tr>
-<td>XCTClockMetric</td>
-<td>记录性能测试期间所用时间的指标。</td>
-</tr>
-<tr>
-<td>XCTMemoryMetric</td>
-<td>记录性能测试使用的物理内存的指标。</td>
-</tr>
-<tr>
-<td>XCTOSSignpostMetric</td>
-<td>用于记录性能测试执行带路标的代码区域所花费的时间的指标。</td>
-</tr>
-<tr>
-<td>XCTStorageMetric</td>
-<td>记录性能测试逻辑写入存储的数据量的指标。</td>
-</tr>
-<tr>
-<td>XCTApplicationLaunchMetric</td>
-<td>记录性能测试的应用程序启动持续时间的指标</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>代码示例:</p>
-<pre><code class="lang-swift">import XCTest
+			<p>Notarization(公证): 提交macOS 软件（或其它运行程序文件），到Apple检查审核。</p>
+<p>此操作可以检查程序是否存在恶意代码。</p>
+<h2 id="如果不对软件进行Apple公证审核会怎么样？"><a href="#如果不对软件进行Apple公证审核会怎么样？" class="headerlink" title="如果不对软件进行Apple公证审核会怎么样？"></a>如果不对软件进行Apple公证审核会怎么样？</h2><p>下面我们将打开一个未经过Apple公证的软件。</p>
+<p><img src="/images/xcrun-notarytool-open-2.jpg" alt=""></p>
+<h2 id="打开已经过Apple公证审核的软件"><a href="#打开已经过Apple公证审核的软件" class="headerlink" title="打开已经过Apple公证审核的软件"></a>打开已经过Apple公证审核的软件</h2><p><img src="/images/xcrun-notarytool-open-1.jpg" alt=""></p>
+<h2 id="如何公证？"><a href="#如何公证？" class="headerlink" title="如何公证？"></a>如何公证？</h2><p>生成App专用密码。文档参考: <a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/102654">https://support.apple.com/zh-cn/102654</a></p>
+<p>命令行提交指定文件</p>
+<pre><code class="lang-bash">xcrun notarytool submit ~/xxxx.dmg --apple-id &quot;&lt;apple-id&gt;&quot;  --team-id &quot;&lt;team-id&gt;&quot; --password &quot;&lt;passwd&gt;&quot;
 
-final class PerformanceTests: XCTestCase &#123;
+# 请正确填写appid、team-id、App专用密码
+xcrun notarytool submit ~/xxxx.dmg --apple-id &quot;appleid@xxxx.com&quot;  --team-id &quot;YQXXXXXXXX&quot; --password &quot;fajy-xxxx-xxxx-xxxx&quot;
+</code></pre>
+<h2 id="查看公证历史和公证日志"><a href="#查看公证历史和公证日志" class="headerlink" title="查看公证历史和公证日志"></a>查看公证历史和公证日志</h2><pre><code class="lang-bash">xcrun notarytool history --apple-id &quot;&lt;apple-id&gt;&quot;  --team-id &quot;&lt;team-id&gt;&quot;  --password &quot;&lt;passwd&gt;&quot;
 
-    override func setUpWithError() throws &#123;
-        continueAfterFailure = false
-    &#125;
-
-    override func tearDownWithError() throws &#123;
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    &#125;
-
-    func testLaunchPerformance() throws &#123;
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) &#123;
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) &#123;
-                XCUIApplication(bundleIdentifier: &quot;io.dcloud.uniappx&quot;).launch()
-            &#125;
-        &#125;
-    &#125;
-&#125;
+xcrun notarytool log &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot; --apple-id &quot;&lt;apple-id&gt;&quot;  --team-id &quot;&lt;team-id&gt;&quot;  --password &quot;&lt;passwd&gt;&quot;
 </code></pre>
 
 			<br>
@@ -128,23 +84,8 @@ final class PerformanceTests: XCTestCase &#123;
             
             
                  
-                
-            
-                 
                  <!-- 在找到当前文章所在的 index -->
                     
-                    
-                         
-
-                        
-
-                         <!-- 下一篇文章 --> 
-                            <div class="new">
-                                <span>下一章</span>
-                                <a href="/2025/05/23/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcrun-notarytool/"> xcrun notarytool 命令行工具 - 对文件进行公证审核</a>
-                            </div>
-                        
-
                     
                          
 
@@ -158,7 +99,7 @@ final class PerformanceTests: XCTestCase &#123;
                           <!-- 上一篇文章 --> 
                             <div class="old">
                                 <span>上一章</span>
-                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcodebuild/"> xcodebuild命令行工具</a>
+                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xctest-measurement-metrics/"> iOS xctest metrics测试指标</a>
                             </div>
                         
 
@@ -186,6 +127,16 @@ final class PerformanceTests: XCTestCase &#123;
                         
 
                     
+                         
+
+                        
+
+                        
+
+                    
+                
+            
+                 
                 
             
                  

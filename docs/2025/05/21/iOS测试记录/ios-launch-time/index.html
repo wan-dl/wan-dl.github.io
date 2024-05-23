@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1716351514312">
+<link rel="stylesheet" href="/css/style.css?v=1716437361353">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/styles/github.min.css">
 <script src="/styles/highlight.min.js"></script>
@@ -61,13 +61,12 @@ final class PerformanceTests: XCTestCase &#123;
     &#125;
 
     override func tearDownWithError() throws &#123;
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        XCUIApplication(bundleIdentifier: &quot;io.dcloud.uniappx&quot;).terminate()
     &#125;
 
     func testLaunchPerformance() throws &#123;
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) &#123;
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) &#123;
+            measure(metrics: [XCTApplicationLaunchMetric(), XCTMemoryMetric()]) &#123;
                 XCUIApplication(bundleIdentifier: &quot;io.dcloud.uniappx&quot;).launch()
             &#125;
         &#125;
@@ -76,8 +75,10 @@ final class PerformanceTests: XCTestCase &#123;
 </code></pre>
 <p>请注意：下图，标红部分，这里传入了bundleID，用于启动特定的应用。</p>
 <p><img src="/images/xcode-measure-code.jpg" alt=""></p>
-<p>测试结果：</p>
+<p>Xcode控制台输出的测试日志：</p>
 <p><img src="/images/xcode-measure-result.jpg" alt=""></p>
+<p>当然，选择测试用例，右键菜单【Jump to Report】也可以看到测试报告。</p>
+<p><img src="/images/xcode-xctest-report-metrics.jpg" alt=""></p>
 <h2 id="2-使用Xcode-Instruments工具"><a href="#2-使用Xcode-Instruments工具" class="headerlink" title="2. 使用Xcode Instruments工具"></a>2. 使用Xcode Instruments工具</h2><p>Instrument是 苹果官方IDE Xcode 自带的 调试工具。<br>访问入口:Xcode 顶部菜单 【Xcode】-&gt;【Open Developer tool】-&gt;【lnstruments】。</p>
 <p><img src="/images/xcode-menus-toos.jpg" alt=""></p>
 <p>如下图所示，我们研究启动时间，主要用到两个。</p>
@@ -86,6 +87,7 @@ final class PerformanceTests: XCTestCase &#123;
 <li>Time Profiler：时间分析器，对运行在系统cpu上的进程执行基于低开销时间的采样</li>
 </ul>
 <p><img src="/images/xcode-instruments.jpg" alt=""></p>
+<p><img src="/images/instruments-time-profiler.jpg" alt=""></p>
 <h2 id="3-Xcode-配置DYLD环境变量"><a href="#3-Xcode-配置DYLD环境变量" class="headerlink" title="3. Xcode 配置DYLD环境变量"></a>3. Xcode 配置DYLD环境变量</h2><blockquote>
 <p>注意：DYLD_PRINT_STATISTICS 仅适用于iOS 15以下。iOS以上不起作用。</p>
 </blockquote>
@@ -118,8 +120,28 @@ final class PerformanceTests: XCTestCase &#123;
                 
             
                  
+                
+            
+                 
+                
+            
+                 
                  <!-- 在找到当前文章所在的 index -->
                     
+                    
+                         
+
+                        
+
+                        
+
+                    
+                         
+
+                        
+
+                        
+
                     
                          
 
@@ -128,7 +150,7 @@ final class PerformanceTests: XCTestCase &#123;
                          <!-- 下一篇文章 --> 
                             <div class="new">
                                 <span>下一章</span>
-                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xctest-measurement-metrics/"> iOS xctest metrics测试指标</a>
+                                <a href="/2025/05/22/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcodebuild/"> xcodebuild命令行工具</a>
                             </div>
                         
 
@@ -145,7 +167,7 @@ final class PerformanceTests: XCTestCase &#123;
                           <!-- 上一篇文章 --> 
                             <div class="old">
                                 <span>上一章</span>
-                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/xcrun-command-line-tool/"> xcrun命令行工具</a>
+                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/facebook-idb/"> facebook idb工具介绍</a>
                             </div>
                         
 

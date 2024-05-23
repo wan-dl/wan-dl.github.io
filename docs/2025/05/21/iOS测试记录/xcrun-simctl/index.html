@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 	<head>
 		
-<title>xcrun命令行工具 - 万家灯火</title>
+<title>xcrun simctl 命令行工具 - 操作iOS模拟器 - 万家灯火</title>
 <meta charset="utf-8" />
 <meta name="keywords" content="" />
 <meta
@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=5"
 />
 <meta name="generator" content="Hexo 6.3.0">
-<link rel="stylesheet" href="/css/style.css?v=1716351514312">
+<link rel="stylesheet" href="/css/style.css?v=1716437361354">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/styles/github.min.css">
 <script src="/styles/highlight.min.js"></script>
@@ -36,13 +36,13 @@
         <div class="content">
 	<div class="banner">
 		<div class="container">
-			<h1>xcrun命令行工具</h1>
+			<h1>xcrun simctl 命令行工具 - 操作iOS模拟器</h1>
 			<div class="info"><span class="date">2025年5月21日</span>•wan-dada 
 			
 					《<a class="nexmoefont icon-appstore-fill -link" href="/categories/iOS%E8%AE%B0%E5%BD%95/">iOS记录</a>》
 				
 				
-					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xcrun-command-line-tool.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
+					<a href="https://github.com/nexmoe/books/tree/master/source/_posts/iOS测试记录/xcrun-simctl.md" target="_blank" rel="external nofollow noreferrer noopener">编辑</a>
 				
 			</div>
 			
@@ -50,46 +50,52 @@
 	</div>
 	<div class="container">
 		<article class="post">
-			<h3 id="查看iOS模拟器列表"><a href="#查看iOS模拟器列表" class="headerlink" title="查看iOS模拟器列表"></a>查看iOS模拟器列表</h3><pre><code class="lang-bash">xcrun simctl list devices
+			<p>xcrun 是 macOS 上的一个命令行工具，用于在命令行中执行 Xcode 开发工具链中的各种工具和实用程序，而无需直接指定其完整路径。这使得在终端中更轻松地调用和管理 Xcode 相关的工具。</p>
+<p><strong>下面将介绍使用xcrun simctl对iOS模拟器进行操作。</strong></p>
+<h2 id="查看iOS模拟器列表"><a href="#查看iOS模拟器列表" class="headerlink" title="查看iOS模拟器列表"></a>查看iOS模拟器列表</h2><pre><code class="lang-bash">xcrun simctl list devices
 </code></pre>
-<h3 id="启动模拟器"><a href="#启动模拟器" class="headerlink" title="启动模拟器"></a>启动模拟器</h3><pre><code class="lang-bash">xcrun simctl boot &lt;UDID&gt;
+<p>获取所有的设备（包含真机)</p>
+<pre><code class="lang-shell">xcrun xctrace list devices
+</code></pre>
+<h2 id="启动模拟器"><a href="#启动模拟器" class="headerlink" title="启动模拟器"></a>启动模拟器</h2><pre><code class="lang-bash">xcrun simctl boot &lt;UDID&gt;
 
 open -a simulator
 </code></pre>
-<h3 id="关闭模拟器"><a href="#关闭模拟器" class="headerlink" title="关闭模拟器"></a>关闭模拟器</h3><pre><code class="lang-bash">xcrun simctl shutdown &lt;UDID&gt;
+<h2 id="关闭模拟器"><a href="#关闭模拟器" class="headerlink" title="关闭模拟器"></a>关闭模拟器</h2><pre><code class="lang-bash">xcrun simctl shutdown &lt;UDID&gt;
 </code></pre>
-<h3 id="重置模拟器"><a href="#重置模拟器" class="headerlink" title="重置模拟器"></a>重置模拟器</h3><pre><code class="lang-bash">xcrun simctl erase &lt;UDID&gt;
+<h2 id="重置模拟器"><a href="#重置模拟器" class="headerlink" title="重置模拟器"></a>重置模拟器</h2><pre><code class="lang-bash">xcrun simctl erase &lt;UDID&gt;
 </code></pre>
-<h3 id="清理不可用的模拟器"><a href="#清理不可用的模拟器" class="headerlink" title="清理不可用的模拟器"></a>清理不可用的模拟器</h3><blockquote>
+<h2 id="清理不可用的模拟器"><a href="#清理不可用的模拟器" class="headerlink" title="清理不可用的模拟器"></a>清理不可用的模拟器</h2><blockquote>
 <p>当Mac空间不够用时，这条命令或许可以帮你重获不是磁盘空间。</p>
 <pre><code class="lang-bash">xcrun simctl delete unavailable
 </code></pre>
 </blockquote>
-<h3 id="切换主题模式"><a href="#切换主题模式" class="headerlink" title="切换主题模式"></a>切换主题模式</h3><pre><code class="lang-bash"># 浅色主题
+<h2 id="切换主题模式"><a href="#切换主题模式" class="headerlink" title="切换主题模式"></a>切换主题模式</h2><pre><code class="lang-bash"># 浅色主题
 xcrun simctl ui &lt;UDID&gt; appearance dark
 
 # 深色主题
 xcrun simctl ui &lt;UDID&gt; appearance light
 </code></pre>
-<h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><blockquote>
+<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><blockquote>
 <p>booted代表当前启动的模拟器；也可指定模拟器<UDID></p>
 </blockquote>
 <pre><code class="lang-bash">xcrun simctl io booted screenshot xxx.png
 
 xcrun simctl io &lt;UDID&gt; screenshot xxx.png
 </code></pre>
-<h3 id="录制模拟器视频"><a href="#录制模拟器视频" class="headerlink" title="录制模拟器视频"></a>录制模拟器视频</h3><blockquote>
+<h2 id="录制模拟器视频"><a href="#录制模拟器视频" class="headerlink" title="录制模拟器视频"></a>录制模拟器视频</h2><blockquote>
 <p>在终端按Ctrl+C来停止录屏.</p>
 <pre><code>xcrun simctl io booted recordVideo test.mp4
 </code></pre></blockquote>
-<h3 id="启动指定应用名称"><a href="#启动指定应用名称" class="headerlink" title="启动指定应用名称"></a>启动指定应用名称</h3><pre><code class="lang-bash">xcrun simctl launch booted &lt;packageName&gt;
+<h2 id="启动指定应用名称"><a href="#启动指定应用名称" class="headerlink" title="启动指定应用名称"></a>启动指定应用名称</h2><pre><code class="lang-bash">xcrun simctl launch booted &lt;packageName&gt;
 
 xcrun simctl launch &lt;UDID&gt; &lt;packageName&gt;
 </code></pre>
-<h3 id="关闭已打开的应用"><a href="#关闭已打开的应用" class="headerlink" title="关闭已打开的应用"></a>关闭已打开的应用</h3><pre><code>xcrun simctl terminate booted &lt;packageName&gt;
+<h2 id="关闭已打开的应用"><a href="#关闭已打开的应用" class="headerlink" title="关闭已打开的应用"></a>关闭已打开的应用</h2><pre><code class="lang-bash">xcrun simctl terminate booted &lt;packageName&gt;
 
 xcrun simctl terminate &lt;UDID&gt; &lt;packageName&gt;
-</code></pre><h3 id="设置或清除状态栏"><a href="#设置或清除状态栏" class="headerlink" title="设置或清除状态栏"></a>设置或清除状态栏</h3><pre><code class="lang-bash">// 设置时间
+</code></pre>
+<h2 id="设置或清除状态栏"><a href="#设置或清除状态栏" class="headerlink" title="设置或清除状态栏"></a>设置或清除状态栏</h2><pre><code class="lang-bash">// 设置时间
 xcrun simctl status_bar booted override --time 00:00
 
 // 设置电量为50
@@ -98,9 +104,9 @@ xcrun simctl status_bar booted override --batteryLevel 50
 // 清除修改
 xcrun simctl status_bar booted clear
 </code></pre>
-<h3 id="隐私授权"><a href="#隐私授权" class="headerlink" title="隐私授权"></a>隐私授权</h3><pre><code class="lang-bash">xcrun simctl privacy booted grant all &lt;packageName&gt;
+<h2 id="隐私授权"><a href="#隐私授权" class="headerlink" title="隐私授权"></a>隐私授权</h2><pre><code class="lang-bash">xcrun simctl privacy booted grant all &lt;packageName&gt;
 </code></pre>
-<h3 id="xcrun可用的命令"><a href="#xcrun可用的命令" class="headerlink" title="xcrun可用的命令"></a>xcrun可用的命令</h3><p>下面是xcrun —help的输出。</p>
+<h2 id="xcrun可用的命令"><a href="#xcrun可用的命令" class="headerlink" title="xcrun可用的命令"></a>xcrun可用的命令</h2><p>下面是xcrun —help的输出。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -429,8 +435,38 @@ xcrun simctl status_bar booted clear
                 
             
                  
+                
+            
+                 
+                
+            
+                 
+                
+            
+                 
                  <!-- 在找到当前文章所在的 index -->
                     
+                    
+                         
+
+                        
+
+                        
+
+                    
+                         
+
+                        
+
+                        
+
+                    
+                         
+
+                        
+
+                        
+
                     
                          
 
@@ -446,33 +482,18 @@ xcrun simctl status_bar booted clear
                          <!-- 下一篇文章 --> 
                             <div class="new">
                                 <span>下一章</span>
-                                <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/ios-launch-time/"> iOS启动时间测试调研记录</a>
-                            </div>
-                        
-
-                    
-                         
-
-                        
-
-                        
-
-                    
-                         
-
-                          <!-- 上一篇文章 --> 
-                            <div class="old">
-                                <span>上一章</span>
                                 <a href="/2025/05/21/iOS%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95/facebook-idb/"> facebook idb工具介绍</a>
                             </div>
                         
 
+                    
+                         
+
+                        
+
                         
 
                     
-                
-            
-                 
                 
             
         
