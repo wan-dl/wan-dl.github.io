@@ -22,13 +22,12 @@ final class PerformanceTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        XCUIApplication(bundleIdentifier: "io.dcloud.uniappx").terminate()
     }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
+            measure(metrics: [XCTApplicationLaunchMetric(), XCTMemoryMetric()]) {
                 XCUIApplication(bundleIdentifier: "io.dcloud.uniappx").launch()
             }
         }
@@ -42,9 +41,13 @@ final class PerformanceTests: XCTestCase {
 
 ![](/images/xcode-measure-code.jpg)
 
-测试结果：
+Xcode控制台输出的测试日志：
 
 ![](/images/xcode-measure-result.jpg)
+
+当然，选择测试用例，右键菜单【Jump to Report】也可以看到测试报告。
+
+![](/images/xcode-xctest-report-metrics.jpg)
 
 
 ## 2. 使用Xcode Instruments工具
@@ -60,6 +63,8 @@ Instrument是 苹果官方IDE Xcode 自带的 调试工具。
 - Time Profiler：时间分析器，对运行在系统cpu上的进程执行基于低开销时间的采样
 
 ![](/images/xcode-instruments.jpg)
+
+![](/images/instruments-time-profiler.jpg)
 
 ## 3. Xcode 配置DYLD环境变量
 

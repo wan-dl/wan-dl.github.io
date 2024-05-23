@@ -1,16 +1,26 @@
 ---
-title: xcrun命令行工具
+title: xcrun simctl 命令行工具 - 操作iOS模拟器
 date: 2025-5-21
 categories: iOS记录
 ---
 
-### 查看iOS模拟器列表
+xcrun 是 macOS 上的一个命令行工具，用于在命令行中执行 Xcode 开发工具链中的各种工具和实用程序，而无需直接指定其完整路径。这使得在终端中更轻松地调用和管理 Xcode 相关的工具。
+
+**下面将介绍使用xcrun simctl对iOS模拟器进行操作。**
+
+## 查看iOS模拟器列表
 
 ```bash
 xcrun simctl list devices
 ```
 
-### 启动模拟器
+获取所有的设备（包含真机)
+
+```shell
+xcrun xctrace list devices
+```
+
+## 启动模拟器
 
 ```bash
 xcrun simctl boot <UDID>
@@ -18,26 +28,26 @@ xcrun simctl boot <UDID>
 open -a simulator
 ```
 
-### 关闭模拟器
+## 关闭模拟器
 
 ```bash
 xcrun simctl shutdown <UDID>
 ```
 
-### 重置模拟器
+## 重置模拟器
 
 ```bash
 xcrun simctl erase <UDID>
 ```
 
-### 清理不可用的模拟器
+## 清理不可用的模拟器
 
 > 当Mac空间不够用时，这条命令或许可以帮你重获不是磁盘空间。
 ```bash
 xcrun simctl delete unavailable
 ```
 
-### 切换主题模式
+## 切换主题模式
 
 ```bash
 # 浅色主题
@@ -47,7 +57,7 @@ xcrun simctl ui <UDID> appearance dark
 xcrun simctl ui <UDID> appearance light
 ```
 
-### 截图
+## 截图
 
 > booted代表当前启动的模拟器；也可指定模拟器<UDID>
 
@@ -58,14 +68,14 @@ xcrun simctl io <UDID> screenshot xxx.png
 ```
 
 
-### 录制模拟器视频
+## 录制模拟器视频
 
 > 在终端按Ctrl+C来停止录屏.
 ```
 xcrun simctl io booted recordVideo test.mp4
 ```
 
-### 启动指定应用名称
+## 启动指定应用名称
 
 ```bash
 xcrun simctl launch booted <packageName>
@@ -73,15 +83,15 @@ xcrun simctl launch booted <packageName>
 xcrun simctl launch <UDID> <packageName>
 ```
 
-### 关闭已打开的应用
+## 关闭已打开的应用
 
-```
+```bash
 xcrun simctl terminate booted <packageName>
 
 xcrun simctl terminate <UDID> <packageName>
 ```
 
-### 设置或清除状态栏
+## 设置或清除状态栏
 
 ```bash
 // 设置时间
@@ -94,14 +104,14 @@ xcrun simctl status_bar booted override --batteryLevel 50
 xcrun simctl status_bar booted clear
 ```
 
-### 隐私授权
+## 隐私授权
 
 ```bash
 xcrun simctl privacy booted grant all <packageName> 
 ```
 
 
-### xcrun可用的命令
+## xcrun可用的命令
 
 下面是xcrun --help的输出。
 
