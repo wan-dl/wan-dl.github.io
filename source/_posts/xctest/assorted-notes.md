@@ -11,3 +11,4 @@ categories: 使用 XCTest 测试 iOS App
 ## 一些有用的网络文章
 
 - [https://juejin.cn/post/6877834861269221383](https://juejin.cn/post/6877834861269221383)
+- [https://juejin.cn/post/6944717246988206094?from=search-suggest](https://juejin.cn/post/6944717246988206094?from=search-suggest)
