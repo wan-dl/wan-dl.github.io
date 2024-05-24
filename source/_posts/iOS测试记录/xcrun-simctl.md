@@ -1,7 +1,8 @@
 ---
 title: xcrun simctl 命令行工具 - 操作iOS模拟器
 date: 2025-5-21
-categories: iOS记录
+categories: iOS
+icon: apple
 ---
 
 xcrun 是 macOS 上的一个命令行工具，用于在命令行中执行 Xcode 开发工具链中的各种工具和实用程序，而无需直接指定其完整路径。这使得在终端中更轻松地调用和管理 Xcode 相关的工具。

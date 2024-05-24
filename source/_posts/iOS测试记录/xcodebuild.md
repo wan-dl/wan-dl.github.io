@@ -1,7 +1,8 @@
 ---
 title: xcodebuild命令行工具
 date: 2025-5-22
-categories: iOS记录
+categories: iOS
+icon: apple
 ---
 
 通常，我们都是在Xcode界面中进行操作。如果我们想在命令行操作，这个时候就会用到xcodebuild.

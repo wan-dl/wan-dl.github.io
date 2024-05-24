@@ -1,7 +1,8 @@
 ---
 title: xcrun notarytool 命令行工具 - 对文件进行公证审核
 date: 2025-5-23
-categories: iOS记录
+categories: iOS
+icon: apple
 ---
 
 Notarization(公证): 提交macOS 软件（或其它运行程序文件），到Apple检查审核。

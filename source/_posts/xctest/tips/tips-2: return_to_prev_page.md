@@ -1,7 +1,8 @@
 ---
 title: Tips-002. iOS应用 - 返回到上个页面
 date: 2025-5-23
-categories: 使用 XCTest 测试 iOS App
+categories: XCTest
+icon: xctest
 ---
 
 > 以下代码，仅在Swift + SwiftUI开发的应用上测试过。

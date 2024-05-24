@@ -1,7 +1,8 @@
 ---
 title: logging
 date: 2023-5-27
-categories: Python记录
+categories: Python
+icon: Python
 ---
 
 # logging

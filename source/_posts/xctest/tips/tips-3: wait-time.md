@@ -1,7 +1,8 @@
 ---
 title: Tips-003. iOS应用 - 等待时间或等待元素出现
 date: 2025-5-23
-categories: 使用 XCTest 测试 iOS App
+categories: XCTest
+icon: xctest
 ---
 
 > 以下代码，仅在Swift + SwiftUI开发的应用上测试过。

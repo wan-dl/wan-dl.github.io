@@ -1,7 +1,8 @@
 ---
 title: iOS xctest metrics测试指标
 date: 2025-5-22
-categories: 使用 XCTest 测试 iOS App
+categories: XCTest
+icon: xctest
 ---
 
 ### metrics测试指标
