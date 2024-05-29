@@ -3,6 +3,7 @@ title: logging
 date: 2023-5-27
 categories: Python
 icon: Python
+desc: 日常使用笔记
 ---
 
 # logging

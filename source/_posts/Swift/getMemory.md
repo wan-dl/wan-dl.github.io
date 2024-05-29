@@ -1,7 +1,7 @@
 ---
 title: iOS 获取当前App使用内存
 date: 2025-5-28
-categories: Swift
+categories: Apple Swift
 icon: swift
 ---
 
