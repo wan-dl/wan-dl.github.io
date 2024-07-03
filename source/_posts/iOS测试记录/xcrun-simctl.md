@@ -111,6 +111,12 @@ xcrun simctl status_bar booted clear
 xcrun simctl privacy booted grant all <packageName> 
 ```
 
+## 获取启动的模拟器UDID
+
+```bash
+xcrun simctl getenv booted SIMULATOR_UDID
+```
+
 
 ## xcrun可用的命令
 
