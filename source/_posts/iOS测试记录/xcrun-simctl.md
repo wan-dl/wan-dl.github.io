@@ -1,6 +1,6 @@
 ---
 title: xcrun simctl 命令行工具 - 操作iOS模拟器
-date: 2025-5-21
+date: 2025-4-21
 categories: iOS
 icon: apple
 ---
@@ -115,6 +115,12 @@ xcrun simctl privacy booted grant all <packageName>
 
 ```bash
 xcrun simctl getenv booted SIMULATOR_UDID
+```
+
+## 读取所有iOS模拟器的信息
+
+```bash
+defaults read com.apple.iphonesimulator
 ```
 
 

@@ -1,6 +1,6 @@
 ---
 title: facebook idb工具介绍
-date: 2025-5-21
+date: 2025-4-21
 categories: iOS
 icon: apple
 ---

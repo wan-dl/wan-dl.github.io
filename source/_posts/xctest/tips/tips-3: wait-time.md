@@ -1,6 +1,6 @@
 ---
 title: Tips-003. iOS应用 - 等待时间或等待元素出现
-date: 2025-5-23
+date: 2025-4-23
 categories: XCTest
 icon: xctest
 ---

@@ -1,6 +1,6 @@
 ---
 title: Tips-005. 测试slider
-date: 2025-5-30
+date: 2025-4-30
 categories: XCTest
 icon: xctest
 ---
