@@ -41,6 +41,8 @@ app-performance
 
 ## 获取Harmony应用内存
 
+相关文档: [https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/js-apis-hidebug-V13#hidebuggetpss](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/js-apis-hidebug-V13#hidebuggetpss)
+
 创建app-harmony/index.uts文件，输入如下内容：
 
 ```ts
