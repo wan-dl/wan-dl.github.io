@@ -1,6 +1,6 @@
 ---
 title: XCTest 大杂烩
-date: 2025-4-23
+date: 2024-5-23
 categories: XCTest
 icon: xctest
 desc: 使用 XCTest 测试 iOS App

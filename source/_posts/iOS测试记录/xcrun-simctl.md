@@ -1,6 +1,6 @@
 ---
 title: xcrun simctl 命令行工具 - 操作iOS模拟器
-date: 2025-4-21
+date: 2024-5-21
 categories: iOS
 icon: apple
 ---

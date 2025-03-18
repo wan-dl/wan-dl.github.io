@@ -1,6 +1,6 @@
 ---
 title: xcodebuild命令行工具
-date: 2025-4-22
+date: 2024-5-22
 categories: iOS
 icon: apple
 ---

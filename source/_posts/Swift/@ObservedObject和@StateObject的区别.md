@@ -1,6 +1,6 @@
 ---
 title: SwiftUI @ObservedObject 和@StateObject的区别
-date: 2025-06-14
+date: 2024-506-14
 categories: Apple Swift
 icon: swift
 ---

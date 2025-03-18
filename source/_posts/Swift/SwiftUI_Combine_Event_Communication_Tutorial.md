@@ -1,6 +1,6 @@
 ---
 title: SwiftUI和Combine实现视图间事件通信示例
-date: 2025-6-10
+date: 2024-56-10
 categories: Apple Swift
 icon: swift
 ---

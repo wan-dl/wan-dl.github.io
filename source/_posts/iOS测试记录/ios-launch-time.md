@@ -1,6 +1,6 @@
 ---
 title: iOS启动时间测试调研记录
-date: 2025-4-21
+date: 2024-5-21
 categories: iOS
 icon: apple
 ---

@@ -1,6 +1,6 @@
 ---
 title: Tips-006. 侧滑返回上个页面
-date: 2025-4-30
+date: 2024-5-30
 categories: XCTest
 icon: xctest
 ---

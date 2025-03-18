@@ -1,6 +1,6 @@
 ---
 title: Tips-004. XCTest - testPlan 使用测试计划
-date: 2025-4-27
+date: 2024-5-27
 categories: XCTest
 icon: xctest
 ---
