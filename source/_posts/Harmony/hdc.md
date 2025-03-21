@@ -70,3 +70,65 @@ hdc shell snapshot_display -f /data/local/tmp/test.jpeg
 // 发送手机图片到电脑
 hdc file recv /data/local/tmp/test.jpeg $HOME/
 ```
+
+## 获取手机应用页面布局信息（控件树）
+
+```shell
+hdc shell uitest dumpLayout
+```
+
+输出的json文件信息：
+
+```
+{
+    "attributes": {
+        "accessibilityId": "",
+        "backgroundColor": "",
+        "backgroundImage": "",
+        "blur": "",
+        "bounds": "[0,0][1260,2720]",
+        "checkable": "",
+        "checked": "",
+        "clickable": "",
+        "description": "",
+        "enabled": "",
+        "focused": "",
+        "hitTestBehavior": "",
+        "hostWindowId": "",
+        "id": "",
+        "key": "",
+        "longClickable": "",
+        "opacity": "",
+        "origBounds": "",
+        "scrollable": "",
+        "selected": "",
+        "text": "",
+        "type": "",
+        "zIndex": ""
+    },
+    "children": {}
+}
+```
+
+## HDC注入UI模拟操作
+
+相关文档 [https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkxtest-guidelines](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkxtest-guidelines)
+
+```shell
+// 查看帮助文档
+hdc shell uitest uniInput -h
+```
+
+- 屏幕点击
+```shell
+hdc shell uitest uiInput click 657 1556
+```
+
+- keyEvent
+
+```shell
+// 返回主页
+hdc shell uitest uiInput keyEvent Home
+```
+
+keyEvent映射表参考：[https://docs.openharmony.cn/pages/v4.1/en/application-dev/reference/apis-input-kit/js-apis-keycode.md](https://docs.openharmony.cn/pages/v4.1/en/application-dev/reference/apis-input-kit/js-apis-keycode.md)
