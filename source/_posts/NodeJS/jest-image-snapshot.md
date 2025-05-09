@@ -3,6 +3,7 @@ title: 使用jest-image-snapshot对比两张图片或进行截图测试
 date: 2025-4-24
 categories: NodeJS
 desc: 日常使用笔记
+icon: node
 ---
 
 ### 关于jest-image-snapshot
