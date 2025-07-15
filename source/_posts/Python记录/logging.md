@@ -32,6 +32,17 @@ $ WARNING:root:Watch out!
 
 注意：自定义日志级别时注意不要和默认的日志级别数值相同，logging 执行时输出大于等于设置的日志级别的日志信息，如设置日志级别是 INFO，则 INFO、WARNING、ERROR、CRITICAL 级别的日志都会输出。
 
+## 简单示例
+
+```
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
+logger = logging.getLogger("Test")
+
+logger.info(".......")
+```
+
+
 ## 常用示例
 
 ```python
@@ -143,3 +154,10 @@ logger.critical('critical message')
 
 最后，将 `StreamHandler` 添加到 logger 中，并设置 logger 的日志级别为 `logging.DEBUG`。这样就可以输出带有颜色的日志信息了。
 
+## 其它日志库 - loguru
+
+```
+from loguru import logger
+
+logger.info("---")
+```
