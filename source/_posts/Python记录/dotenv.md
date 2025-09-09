@@ -1,5 +1,5 @@
 ---
-title: dotenv: 在 Python 项目中加载环境变量
+title: 在 Python 中使用dotenv加载环境变量
 date: 2025-4-17
 categories: Python
 icon: Python
