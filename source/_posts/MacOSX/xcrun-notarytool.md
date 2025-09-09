@@ -1,7 +1,7 @@
 ---
 title: xcrun notarytool 命令行工具 - 对文件进行公证审核
 date: 2024-5-23
-categories: iOS
+categories: MacOSX
 icon: apple
 ---
 
