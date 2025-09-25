@@ -36,6 +36,12 @@ idb list-apps
 idb list-apps --udid <udid>
 ```
 
+## 应用授权
+
+```shell
+idb approve io.dcloud.uniappx notification --udid 3FFE4F41-997F-4ED3-AC3B-DF4ADB9A4262
+```
+
 ## 安装错误
 
 在安装idb过程中，会要求xcode版本。如下图:
