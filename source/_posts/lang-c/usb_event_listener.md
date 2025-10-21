@@ -1,5 +1,5 @@
 ---
-title: macosx: 使用c语言监听USB插拔事件
+title: macosx 使用c语言监听USB插拔事件
 date: 2025-4-30
 categories: lang-c
 desc: 日常使用笔记

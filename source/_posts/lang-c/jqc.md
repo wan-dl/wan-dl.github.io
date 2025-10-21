@@ -5,3 +5,5 @@ categories: lang-c
 desc: 日常使用笔记
 icon: default
 ---
+
+详情参考: [https://github.com/wan-dl/tiny-tools/tree/main/jqc](https://github.com/wan-dl/tiny-tools/tree/main/jqc)
