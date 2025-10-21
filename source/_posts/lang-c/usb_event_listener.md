@@ -1,7 +1,7 @@
 ---
 title: macosx: 使用c语言监听USB插拔事件
 date: 2025-4-30
-categories: lang_c
+categories: lang-c
 desc: 日常使用笔记
 icon: default
 ---
