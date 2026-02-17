@@ -1,0 +1,53 @@
+/* 自定义样式 - 优化阅读体验 */
+
+body {
+	font-size: 16px;
+	line-height: 1.8;
+}
+
+article p {
+	line-height: 1.8;
+	margin: 1.2em 0;
+}
+
+article ul,
+article ol {
+	line-height: 1.8;
+}
+
+article li {
+	margin: 10px 0;
+}
+
+article code {
+	background-color: #f5f5f5;
+	padding: 12px 14px;
+	line-height: 1.6;
+	border-radius: 6px;
+	margin: 1em 0;
+	font-size: 0.9em;
+}
+
+.highlight {
+	padding: 0.8em 1em;
+	margin: 1em 0;
+	border-radius: 6px;
+	line-height: 1.6;
+	box-sizing: border-box;
+}
+
+article > blockquote {
+	margin-left: 0;
+	border-left: 4px solid #aa874b;
+	padding: 0.8em 1.2em;
+	font-style: italic;
+	color: #666;
+	background-color: #faf8f5;
+	border-radius: 0 6px 6px 0;
+	line-height: 1.8;
+}
+
+.content .catalogue li {
+	line-height: 1.6;
+	margin: 1.5em 0;
+}

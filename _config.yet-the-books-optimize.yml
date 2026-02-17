@@ -1,7 +1,7 @@
 
 order_by: -date
 
-head: '<!--<script src="" async></script>-->'
+head: '<link rel="stylesheet" href="/css/custom.css">'
 
 menu:
   Github: https://github.com/wan-dl/wan-dl.github.io
